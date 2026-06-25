@@ -14,12 +14,17 @@
     --color-reserved-bg: #353534;
     --color-service-bg: rgba(26, 26, 26, 0.6);
 
-    --font-display: "42dot Sans", sans-serif;
-    --font-mono: "JetBrains Mono", monospace;
-    --font-serif: "Libre Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+    --font-display: "Archivo", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-serif: "Spectral", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
 
     --phone-width: 402px;
     --padding-h: 20px;
+
+    /* cantos suaves */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
 }
 
 * {
@@ -50,6 +55,9 @@ body {
     align-items: flex-start;
     min-height: 100vh;
     padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -213,13 +221,16 @@ body {
     cursor: pointer;
     border-radius: 0;
     transition: all 0.3s ease;
-    padding: 20px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .btn-primary {
     background-color: var(--color-primary);
     color: var(--color-button-text);
-    padding: 20px 97px;
 }
 
 .btn-primary:hover {
@@ -231,7 +242,6 @@ body {
     color: var(--color-primary);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
-    padding: 20px 99.77px;
 }
 
 .btn-secondary:hover {
@@ -1184,7 +1194,7 @@ body {
 .details-hero-section {
     width: 100%;
     position: relative;
-    height: 487.5px;
+    height: 340px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -2963,4 +2973,162 @@ textarea:focus-visible,
     font-size: 14px;
     line-height: 20px;
     color: var(--color-text-muted);
+}
+
+/* ============================================================
+   MOVIMENTO & MICRO-INTERAÇÕES
+   (deixa o site mais vivo, sem mudar o layout)
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+
+/* ---------- Animações de entrada ---------- */
+@keyframes revealUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* a moldura inteira aparece suavemente */
+.container { animation: fadeIn 0.5s ease both; }
+
+/* hero, títulos de seção e blocos sobem ao carregar */
+.hero-content,
+.hero-text-container,
+.section-header,
+.services-header,
+.cta-content,
+.cta-content-search,
+.details-hero-section,
+.details-description-section {
+    animation: revealUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* cards do inventário entram em sequência (fade, sem deslocar o scroll) */
+.card { animation: fadeIn 0.6s ease both; }
+.cards-container .card:nth-child(1) { animation-delay: 0.05s; }
+.cards-container .card:nth-child(2) { animation-delay: 0.15s; }
+.cards-container .card:nth-child(3) { animation-delay: 0.25s; }
+.cards-container .card:nth-child(4) { animation-delay: 0.35s; }
+.cards-container .card:nth-child(5) { animation-delay: 0.45s; }
+
+/* cards de serviço sobem em sequência */
+.service-card { animation: revealUp 0.7s ease both; }
+.services-grid .service-card:nth-child(1) { animation-delay: 0.05s; }
+.services-grid .service-card:nth-child(2) { animation-delay: 0.15s; }
+.services-grid .service-card:nth-child(3) { animation-delay: 0.25s; }
+.services-grid .service-card:nth-child(4) { animation-delay: 0.35s; }
+
+/* ---------- Hover: cards do inventário ---------- */
+.card { cursor: pointer; }
+.card-image { transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1); }
+.card:hover .card-image { transform: scale(1.06); }
+.card-title { transition: color 0.3s ease; }
+.card:hover .card-title { color: var(--color-primary); }
+
+/* ---------- Hover: cards de serviço ---------- */
+.service-card {
+    transition: transform 0.35s ease, border-color 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+}
+.service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 212, 61, 0.25);
+    background-color: rgba(40, 40, 40, 0.7);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+.service-link, .link-icon { transition: color 0.3s ease, transform 0.3s ease; }
+.service-card:hover .service-link { color: var(--color-primary); }
+.service-card:hover .link-icon { transform: translateX(4px); }
+
+/* ---------- Hover: botões ---------- */
+.btn-primary:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(255, 212, 61, 0.28);
+}
+.btn-secondary:hover { transform: translateY(-2px); }
+
+.fixed-proposal-btn:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 212, 61, 0.4);
+}
+.fixed-proposal-btn .proposal-icon { transition: transform 0.3s ease; }
+.fixed-proposal-btn:hover .proposal-icon { transform: translateX(4px); }
+
+/* ---------- Hover: ícones de header / ações ---------- */
+.header-menu-btn,
+.header-back-btn,
+.filter-button,
+.garagem-icon-btn,
+.garagem-item {
+    transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+.header-menu-btn:hover,
+.header-back-btn:hover,
+.filter-button:hover,
+.garagem-icon-btn:hover { opacity: 0.75; transform: scale(1.08); }
+.garagem-item:hover { transform: translateY(-3px); border-color: rgba(255, 212, 61, 0.25); }
+
+/* ---------- Hover: navegação inferior ---------- */
+.nav-item { transition: transform 0.25s ease, opacity 0.25s ease; }
+.nav-item:hover { transform: translateY(-2px); }
+
+/* ---------- Foco da busca ---------- */
+.search-input-wrapper { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+
+/* ---------- Acessibilidade: foco visível por teclado (IHC) ---------- */
+/* só em links e botões; inputs têm o anel dourado suave do próprio wrapper */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid rgba(255, 212, 61, 0.6);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* sem contorno duro dentro dos campos de texto */
+.search-input:focus,
+.search-input:focus-visible,
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.filter-select:focus-visible {
+    outline: none;
+}
+
+/* ---------- Cantos suaves (só um pouquinho) ---------- */
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-cta { border-radius: var(--radius-sm); }
+
+.card-image-wrapper,
+.card-image-container,
+.fixed-proposal-btn,
+.search-input-wrapper,
+.filter-button,
+.form-input,
+.form-textarea,
+.filter-select { border-radius: var(--radius-md); }
+
+.card-badge { border-radius: var(--radius-sm); }
+
+/* ---------- Respeita quem prefere menos movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ---------- Intro da página Falar com Especialista ---------- */
+.specialist-intro {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
 }

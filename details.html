@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4BOSS - Detalhes do Veículo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +18,7 @@
                 </svg>
             </a>
             <a href="index.html" class="logo-link">
-                <h1 class="logo">4BOSS</h1>
+                <h1 class="logo">4|BOSS</h1>
             </a>
             <button class="header-menu-btn">
                 <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -29,18 +32,18 @@
         <main class="main details-main">
             <section class="details-hero-section">
                 <div class="hero-background-image">
-                    <img src="assets/card-porsche.png" alt="Porsche 911 GT3 RS" class="hero-image">
+                    <img src="assets/card-porsche.png" alt="Porsche 911 GT3 RS" class="hero-image" id="heroImage">
                     <div class="hero-gradient"></div>
                 </div>
                 <div class="hero-content-details">
                     <p class="hero-label-details">EXCLUSIVO 4BOSS</p>
-                    <h2 class="hero-title-details">911 GT3 RS</h2>
+                    <h2 class="hero-title-details" id="carTitle">911 GT3 RS</h2>
                 </div>
             </section>
 
             <section class="details-description-section">
                 <div class="description-wrapper">
-                    <p class="description-text">Uma máquina de precisão projetada para quem exige o ápice do desempenho automotivo. O 911 GT3 RS leva a engenharia de pista para a rua: motor boxer aspirado de altíssima rotação, aerodinâmica ativa e resposta imediata. Uma experiência de condução visceral e sem concessões.</p>
+                    <p class="description-text" id="carDescription">Uma máquina de precisão projetada para quem exige o ápice do desempenho automotivo. O 911 GT3 RS leva a engenharia de pista para a rua: motor boxer aspirado de altíssima rotação, aerodinâmica ativa e resposta imediata. Uma experiência de condução visceral e sem concessões.</p>
                     <div class="divider"></div>
                 </div>
 
@@ -89,7 +92,7 @@
             </section>
         </main>
 
-        <a href="proposal.html" class="fixed-proposal-btn">
+        <a href="proposal.html" class="fixed-proposal-btn" id="proposalBtn">
             <span class="proposal-text">FAZER PROPOSTA</span>
             <svg class="proposal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -114,5 +117,39 @@
             </div>
         </nav>
     </div>
+
+    <script src="cars.js"></script>
+    <script>
+        (function () {
+            const id = new URLSearchParams(location.search).get('car') || 'porsche';
+            const c = (window.CARS && window.CARS[id]) || window.CARS.porsche;
+
+            const img = document.getElementById('heroImage');
+            img.src = c.img;
+            img.alt = c.full;
+            document.getElementById('carTitle').textContent = c.name;
+            document.getElementById('carDescription').textContent = c.desc;
+            document.title = '4BOSS - ' + c.full;
+
+            const nums = document.querySelectorAll('.tech-specs-grid .spec-number');
+            if (nums.length === 3) {
+                nums[0].textContent = c.velocidade;
+                nums[1].textContent = c.potencia;
+                nums[2].textContent = c.zero100;
+            }
+
+            const vals = document.querySelectorAll('.detailed-specs-bento .spec-card-value');
+            if (vals.length === 4) {
+                vals[0].textContent = c.motor;
+                vals[1].textContent = c.transmissao;
+                vals[2].textContent = c.tracao;
+                vals[3].textContent = c.ano;
+            }
+
+            // mantém o carro ao seguir para a proposta
+            const propBtn = document.getElementById('proposalBtn');
+            if (propBtn) propBtn.href = 'proposal.html?car=' + id;
+        })();
+    </script>
 </body>
 </html>

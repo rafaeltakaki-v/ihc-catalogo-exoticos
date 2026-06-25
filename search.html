@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4BOSS - Buscar Superesportivos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +15,7 @@
         <header class="header">
             <div class="header-left">
                 <a href="index.html" class="logo-link">
-                    <h1 class="logo">4BOSS</h1>
+                    <h1 class="logo">4|BOSS</h1>
                 </a>
             </div>
             <div class="header-right">
@@ -29,23 +32,21 @@
         <main class="main search-main">
             <section class="search-section">
                 <div class="search-input-wrapper">
-                    <input type="text" class="search-input" placeholder="BUSCAR NA GARAGEM 4BOSS...">
+                    <input type="text" class="search-input" placeholder="Buscar">
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                 </div>
                 <button class="filter-button" id="filterButton" type="button" aria-label="Abrir filtros">
-                    <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="4" y1="6" x2="20" y2="6"></line>
-                        <line x1="4" y1="12" x2="20" y2="12"></line>
-                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"></path>
                     </svg>
                 </button>
             </section>
 
             <section class="inventory-grid" id="inventoryGrid">
-                <a href="details.html" class="car-card" data-brand="porsche" data-color="blue" data-year="2024" data-mileage="1200" data-model="911 GT3 RS">
+                <a href="details.html?car=porsche" class="car-card" data-brand="porsche" data-color="blue" data-year="2024" data-mileage="1200" data-model="911 GT3 RS">
                     <div class="card-image-container">
                         <img src="assets/card-porsche.png" alt="Porsche 911 GT3 RS" class="card-car-image">
                         <div class="card-gradient"></div>
@@ -69,7 +70,7 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card" data-brand="ferrari" data-color="red" data-year="2023" data-mileage="5000" data-model="SF90 STRADALE">
+                <a href="details.html?car=ferrari" class="car-card" data-brand="ferrari" data-color="red" data-year="2023" data-mileage="5000" data-model="SF90 STRADALE">
                     <div class="card-image-container">
                         <img src="assets/card-ferrari.png" alt="Ferrari SF90 Stradale" class="card-car-image">
                         <div class="card-gradient"></div>
@@ -93,7 +94,7 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card" data-brand="lamborghini" data-color="black" data-year="2022" data-mileage="12000" data-model="AVENTADOR SVJ">
+                <a href="details.html?car=lamborghini" class="car-card" data-brand="lamborghini" data-color="black" data-year="2022" data-mileage="12000" data-model="AVENTADOR SVJ">
                     <div class="card-image-container">
                         <img src="assets/card-lamborghini.png" alt="Lamborghini Aventador SVJ" class="card-car-image">
                         <div class="card-gradient"></div>
@@ -117,7 +118,7 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card" data-brand="bmw" data-color="green" data-year="2024" data-mileage="3000" data-model="M4 COMPETITION">
+                <a href="details.html?car=bmw" class="car-card" data-brand="bmw" data-color="green" data-year="2024" data-mileage="3000" data-model="M4 COMPETITION">
                     <div class="card-image-container">
                         <img src="assets/card-bmw.png" alt="BMW M4 Competition" class="card-car-image">
                         <div class="card-gradient"></div>
@@ -148,7 +149,7 @@
                 <div class="cta-content-search">
                     <h3 class="cta-title-search">PROCURA ALGO<br>ÚNICO?</h3>
                     <p class="cta-description-search">Nosso serviço de Personal Concierge<br>localiza e importa qualquer veículo<br>exclusivo diretamente para sua<br>garagem 4Boss.</p>
-                    <button class="btn btn-specialist">FALAR COM<br>ESPECIALISTA</button>
+                    <a href="especialista.html" class="btn btn-specialist">FALAR COM<br>ESPECIALISTA</a>
                 </div>
             </section>
         </main>

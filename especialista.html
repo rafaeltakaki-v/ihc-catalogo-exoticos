@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4BOSS - Falar com Especialista</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container proposal-container">
+        <!-- Header - TopAppBar -->
+        <header class="header proposal-header">
+            <a href="index.html" class="header-back-btn" aria-label="Ir para o início">
+                <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <a href="index.html" class="logo-link">
+                <h1 class="logo">4|BOSS</h1>
+            </a>
+            <button class="header-menu-btn">
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="19" cy="12" r="1"></circle>
+                    <circle cx="5" cy="12" r="1"></circle>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main proposal-main">
+            <!-- Page Context Header -->
+            <section class="page-context-header">
+                <div class="context-label">ATENDIMENTO PRIVADO</div>
+                <h2 class="context-title">Falar com Especialista</h2>
+                <div class="context-background"></div>
+            </section>
+
+            <!-- Container -->
+            <div class="proposal-content-wrapper">
+                <!-- Specialist Form -->
+                <section class="proposal-form-section">
+                    <p class="specialist-intro">Deixe seus dados e um especialista da 4BOSS entrará em contato para um atendimento personalizado.</p>
+
+                    <form class="proposal-form" id="specialistForm">
+                        <!-- Full Name Field -->
+                        <div class="form-group">
+                            <label for="fullName" class="form-label">NOME COMPLETO</label>
+                            <input type="text" id="fullName" class="form-input" placeholder="João da Silva" required>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-MAIL</label>
+                            <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+                        </div>
+
+                        <!-- Cellphone Field -->
+                        <div class="form-group">
+                            <label for="cellphone" class="form-label">CELULAR</label>
+                            <input type="tel" id="cellphone" class="form-input" placeholder="(11) 99999-9999" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-button">
+                            <span class="submit-text">FALAR COM ESPECIALISTA</span>
+                            <svg class="submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <!-- Success Overlay (Hidden by default) -->
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-content">
+                <div class="success-icon-wrapper">
+                    <div class="success-circle-check">
+                        <svg class="success-checkmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="success-outer-ring"></div>
+                </div>
+                <div class="success-message-wrapper">
+                    <h3 class="success-heading">SOLICITAÇÃO ENVIADA</h3>
+                    <p class="success-text">Recebemos seus dados. Um especialista da 4BOSS entrará em contato pelo telefone informado em até 2 horas.</p>
+                </div>
+                <button class="success-button" id="returnButton">VOLTAR AO INÍCIO</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="bottom-nav">
+            <div class="nav-shadow"></div>
+            <div class="nav-items">
+                <a href="index.html" class="nav-item">
+                    <img src="assets/icon-home.svg" alt="Home" class="nav-icon">
+                    <span class="nav-label">Início</span>
+                </a>
+                <a href="search.html" class="nav-item">
+                    <img src="assets/icon-search.svg" alt="Search" class="nav-icon">
+                    <span class="nav-label">Buscar</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <img src="assets/icon-profile.svg" alt="Profile" class="nav-icon">
+                    <span class="nav-label">Perfil</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        const specialistForm = document.getElementById('specialistForm');
+        const successOverlay = document.getElementById('successOverlay');
+        const returnButton = document.getElementById('returnButton');
+
+        specialistForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successOverlay.classList.add('show');
+        });
+
+        returnButton.addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
