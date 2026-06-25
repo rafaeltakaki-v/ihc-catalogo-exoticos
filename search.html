@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="header-right">
-                <button class="header-menu-btn" id="filterToggle" aria-label="Open filters">
+                <button class="header-menu-btn" id="filterToggle" aria-label="Abrir filtros">
                     <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="4" y1="6" x2="20" y2="6"></line>
                         <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -35,7 +35,7 @@
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                 </div>
-                <button class="filter-button" id="filterButton" type="button" aria-label="Open filters">
+                <button class="filter-button" id="filterButton" type="button" aria-label="Abrir filtros">
                     <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="4" y1="6" x2="20" y2="6"></line>
                         <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -44,12 +44,12 @@
                 </button>
             </section>
 
-            <section class="inventory-grid">
-                <a href="details.html" class="car-card">
+            <section class="inventory-grid" id="inventoryGrid">
+                <a href="details.html" class="car-card" data-brand="porsche" data-color="blue" data-year="2024" data-mileage="1200" data-model="911 GT3 RS">
                     <div class="card-image-container">
                         <img src="assets/card-porsche.png" alt="Porsche 911 GT3 RS" class="card-car-image">
                         <div class="card-gradient"></div>
-                        <div class="card-badge in-stock">IN STOCK</div>
+                        <div class="card-badge badge-in-stock">EM ESTOQUE</div>
                     </div>
                     <div class="card-details">
                         <p class="card-specs">PORSCHE • 2024 • SHARK BLUE</p>
@@ -69,11 +69,11 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card">
+                <a href="details.html" class="car-card" data-brand="ferrari" data-color="red" data-year="2023" data-mileage="5000" data-model="SF90 STRADALE">
                     <div class="card-image-container">
                         <img src="assets/card-ferrari.png" alt="Ferrari SF90 Stradale" class="card-car-image">
                         <div class="card-gradient"></div>
-                        <div class="card-badge exclusive">EXCLUSIVELY AT 4BOSS</div>
+                        <div class="card-badge badge-exclusive">EXCLUSIVO 4BOSS</div>
                     </div>
                     <div class="card-details">
                         <p class="card-specs">FERRARI • 2023 • ROSSO CORSA</p>
@@ -93,11 +93,11 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card">
+                <a href="details.html" class="car-card" data-brand="lamborghini" data-color="black" data-year="2022" data-mileage="12000" data-model="AVENTADOR SVJ">
                     <div class="card-image-container">
                         <img src="assets/card-lamborghini.png" alt="Lamborghini Aventador SVJ" class="card-car-image">
                         <div class="card-gradient"></div>
-                        <div class="card-badge sold">SOLD</div>
+                        <div class="card-badge badge-sold">VENDIDO</div>
                     </div>
                     <div class="card-details">
                         <p class="card-specs">LAMBORGHINI • 2022 • NERO NEMESIS</p>
@@ -117,11 +117,11 @@
                     </div>
                 </a>
 
-                <a href="details.html" class="car-card">
+                <a href="details.html" class="car-card" data-brand="bmw" data-color="green" data-year="2024" data-mileage="3000" data-model="M4 COMPETITION">
                     <div class="card-image-container">
                         <img src="assets/card-bmw.png" alt="BMW M4 Competition" class="card-car-image">
                         <div class="card-gradient"></div>
-                        <div class="card-badge custom">CUSTOM BUILD</div>
+                        <div class="card-badge badge-custom">SOB ENCOMENDA</div>
                     </div>
                     <div class="card-details">
                         <p class="card-specs">BMW • 2024 • ISLE OF MAN GREEN</p>
@@ -142,6 +142,8 @@
                 </a>
             </section>
 
+            <p class="no-results" id="noResults">Nenhum veículo corresponde aos filtros selecionados.</p>
+
             <section class="search-cta-section">
                 <div class="cta-content-search">
                     <h3 class="cta-title-search">PROCURA ALGO<br>ÚNICO?</h3>
@@ -154,53 +156,50 @@
         <div class="filter-overlay" id="filterOverlay">
             <div class="filter-panel">
                 <div class="filter-panel-header">
-                    <h3 class="filter-panel-title">FILTERS</h3>
-                    <button class="filter-close-btn" id="filterClose" type="button" aria-label="Close filters">✕</button>
+                    <h3 class="filter-panel-title">FILTROS</h3>
+                    <button class="filter-close-btn" id="filterClose" type="button" aria-label="Fechar filtros">✕</button>
                 </div>
 
                 <div class="filter-group">
-                    <p class="filter-group-label">Manufactures</p>
+                    <p class="filter-group-label">Fabricantes</p>
                     <div class="filter-option-grid">
-                        <label class="filter-chip"><input type="checkbox" checked> Ferrari</label>
-                        <label class="filter-chip"><input type="checkbox" checked> Porsche</label>
-                        <label class="filter-chip"><input type="checkbox"> Mercedes</label>
-                        <label class="filter-chip"><input type="checkbox"> Bentley</label>
-                        <label class="filter-chip"><input type="checkbox"> BMW</label>
-                        <label class="filter-chip"><input type="checkbox"> WTC</label>
+                        <label class="filter-chip"><input type="checkbox" value="porsche" checked> Porsche</label>
+                        <label class="filter-chip"><input type="checkbox" value="ferrari" checked> Ferrari</label>
+                        <label class="filter-chip"><input type="checkbox" value="lamborghini" checked> Lamborghini</label>
+                        <label class="filter-chip"><input type="checkbox" value="bmw" checked> BMW</label>
                     </div>
                 </div>
 
                 <div class="filter-group">
-                    <p class="filter-group-label">Color</p>
+                    <p class="filter-group-label">Cor</p>
                     <select class="filter-select" id="colorSelect">
-                        <option value="all">All Colors</option>
-                        <option value="blue">Blue</option>
-                        <option value="red">Red</option>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                        <option value="green">Green</option>
+                        <option value="all">Todas as Cores</option>
+                        <option value="blue">Azul</option>
+                        <option value="red">Vermelho</option>
+                        <option value="black">Preto</option>
+                        <option value="green">Verde</option>
                     </select>
                 </div>
 
                 <div class="filter-group">
-                    <p class="filter-group-label">Model Year</p>
+                    <p class="filter-group-label">Ano do Modelo</p>
                     <div class="filter-range-header">
-                        <span>From</span>
+                        <span>A partir de</span>
                         <span id="yearValue">2020</span>
                     </div>
                     <input class="filter-slider" id="yearSlider" type="range" min="2018" max="2025" value="2020">
                 </div>
 
                 <div class="filter-group">
-                    <p class="filter-group-label">Mileage (KM)</p>
+                    <p class="filter-group-label">Quilometragem (KM)</p>
                     <div class="filter-range-header">
-                        <span>Up to</span>
+                        <span>Até</span>
                         <span id="mileageValue">50,000 KM</span>
                     </div>
                     <input class="filter-slider" id="mileageSlider" type="range" min="5000" max="100000" step="5000" value="50000">
                 </div>
 
-                <button class="filter-apply-btn" id="applyFilters" type="button">APPLY FILTERS</button>
+                <button class="filter-apply-btn" id="applyFilters" type="button">APLICAR FILTROS</button>
             </div>
         </div>
 
@@ -209,15 +208,15 @@
             <div class="nav-items">
                 <a href="index.html" class="nav-item">
                     <img src="assets/icon-home.svg" alt="Home" class="nav-icon">
-                    <span class="nav-label">HOME</span>
+                    <span class="nav-label">INÍCIO</span>
                 </a>
                 <a href="search.html" class="nav-item active">
                     <img src="assets/icon-search.svg" alt="Search" class="nav-icon">
-                    <span class="nav-label">SEARCH</span>
+                    <span class="nav-label">BUSCAR</span>
                 </a>
                 <a href="profile.html" class="nav-item">
                     <img src="assets/icon-profile.svg" alt="Profile" class="nav-icon">
-                    <span class="nav-label">PROFILE</span>
+                    <span class="nav-label">PERFIL</span>
                 </a>
             </div>
         </nav>
@@ -233,7 +232,13 @@
         const mileageSlider = document.getElementById('mileageSlider');
         const yearValue = document.getElementById('yearValue');
         const mileageValue = document.getElementById('mileageValue');
+        const colorSelect = document.getElementById('colorSelect');
+        const searchInput = document.querySelector('.search-input');
+        const noResults = document.getElementById('noResults');
+        const cards = Array.from(document.querySelectorAll('.car-card'));
+        const brandChecks = Array.from(document.querySelectorAll('.filter-chip input'));
 
+        // ----- Abrir / fechar o painel de filtros -----
         const openFilters = () => filterOverlay.classList.add('open');
         const closeFilters = () => filterOverlay.classList.remove('open');
 
@@ -242,7 +247,6 @@
         });
 
         filterClose.addEventListener('click', closeFilters);
-        applyFilters.addEventListener('click', closeFilters);
 
         filterOverlay.addEventListener('click', (event) => {
             if (event.target === filterOverlay) {
@@ -250,13 +254,59 @@
             }
         });
 
-        const formatMileage = (value) => `${Number(value).toLocaleString()} KM`;
+        // ----- Atualiza os rótulos dos sliders -----
+        const formatMileage = (value) => `${Number(value).toLocaleString('pt-BR')} KM`;
         yearSlider.addEventListener('input', () => {
             yearValue.textContent = yearSlider.value;
         });
         mileageSlider.addEventListener('input', () => {
             mileageValue.textContent = formatMileage(mileageSlider.value);
         });
+
+        // ----- Filtragem do inventário -----
+        function applyFilterLogic() {
+            const selectedBrands = brandChecks
+                .filter((input) => input.checked)
+                .map((input) => input.value);
+            const color = colorSelect.value;
+            const minYear = Number(yearSlider.value);
+            const maxMileage = Number(mileageSlider.value);
+            const term = searchInput.value.trim().toLowerCase();
+
+            let visibleCount = 0;
+
+            cards.forEach((card) => {
+                const { brand, color: carColor, year, mileage, model } = card.dataset;
+
+                const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(brand);
+                const matchesColor = color === 'all' || carColor === color;
+                const matchesYear = Number(year) >= minYear;
+                const matchesMileage = Number(mileage) <= maxMileage;
+                const matchesTerm =
+                    term === '' ||
+                    model.toLowerCase().includes(term) ||
+                    brand.includes(term);
+
+                const show = matchesBrand && matchesColor && matchesYear && matchesMileage && matchesTerm;
+                card.style.display = show ? '' : 'none';
+                if (show) visibleCount += 1;
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Aplicar e fechar ao clicar no botão
+        applyFilters.addEventListener('click', () => {
+            applyFilterLogic();
+            closeFilters();
+        });
+
+        // Atualização ao vivo enquanto o usuário mexe nos controles
+        searchInput.addEventListener('input', applyFilterLogic);
+        colorSelect.addEventListener('change', applyFilterLogic);
+        yearSlider.addEventListener('input', applyFilterLogic);
+        mileageSlider.addEventListener('input', applyFilterLogic);
+        brandChecks.forEach((input) => input.addEventListener('change', applyFilterLogic));
     </script>
 </body>
 </html>

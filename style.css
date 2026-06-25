@@ -647,7 +647,7 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: var(--phone-width);
+    width: min(var(--phone-width), 100%);
     height: 68px;
     background-color: rgba(19, 19, 19, 0.9);
     border-top: 1px solid var(--color-border);
@@ -978,6 +978,10 @@ body {
     position: absolute;
     top: 12px;
     left: 12px;
+    bottom: auto;
+    right: auto;
+    width: auto;
+    height: auto;
     padding: 6px 12px;
     font-family: var(--font-display);
     font-size: 10px;
@@ -1512,9 +1516,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 8px;
-    background-color: var(--color-accent);
+    width: 48px;
+    height: 3px;
+    background-color: var(--color-primary);
     border-radius: 0;
 }
 
@@ -2023,7 +2027,7 @@ body {
     position: absolute;
     inset: 0;
     background-color: rgba(255, 212, 61, 0.1);
-    border-radius: 12px;
+    border-radius: 50%;
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
@@ -2046,19 +2050,21 @@ body {
     position: relative;
     width: 80px;
     height: 80px;
-    background-color: rgba(19, 19, 19, 0.6);
-    border: 1px solid rgba(77, 70, 51, 0.1);
-    border-radius: 12px;
+    background-color: rgba(255, 212, 61, 0.08);
+    border: 1px solid rgba(255, 212, 61, 0.35);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 30px -6px rgba(255, 212, 61, 0.3);
     z-index: 2;
 }
 
 .success-checkmark-icon {
     width: 40px;
     height: 40px;
-    stroke: var(--color-accent);
+    stroke: var(--color-primary);
+    stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     animation: checkmark-draw 0.6s ease-out forwards;
@@ -2313,7 +2319,7 @@ body {
 /* Profile Bento Grid */
 .profile-bento-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px;
     width: 100%;
 }
@@ -2547,7 +2553,7 @@ body {
 .concierge-section {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     gap: 16px;
     align-items: center;
 }
@@ -2559,7 +2565,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: fit-content;
     height: fit-content;
+    justify-self: start;
 }
 
 .concierge-icon {
@@ -2720,14 +2728,6 @@ body {
         line-height: 18px;
     }
 
-    .concierge-section {
-        grid-template-columns: 1fr;
-    }
-
-    .concierge-button {
-        grid-column: 1;
-    }
-
     .profile-avatar-wrapper {
         width: 80px;
         height: 80px;
@@ -2737,4 +2737,230 @@ body {
         width: 32px;
         height: 32px;
     }
+}
+
+/* ============================================================
+   CAMADA DE REFINAMENTO — polimento de detalhes e interações
+   (anexada ao final: só eleva o acabamento, não muda o layout)
+   ============================================================ */
+
+:root {
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --gold-glow: rgba(255, 212, 61, 0.25);
+}
+
+/* ---------- Piso de acessibilidade ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.car-card:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ---------- ASSINATURA: cards de inventário (showroom) ---------- */
+.car-card,
+.card {
+    transition: transform 0.4s var(--ease), border-color 0.4s var(--ease),
+        box-shadow 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+
+.car-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 212, 61, 0.45);
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 212, 61, 0.12);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* zoom lento da imagem dentro do recorte (overflow já é hidden) */
+.card-car-image,
+.card-image {
+    transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+    will-change: transform;
+}
+
+.car-card:hover .card-car-image,
+.card:hover .card-image {
+    transform: scale(1.06);
+    filter: saturate(1.08);
+}
+
+/* o degradê do card de busca aprofunda no hover, dando foco ao carro */
+.card-gradient {
+    transition: opacity 0.5s var(--ease);
+}
+
+.car-card:hover .card-gradient {
+    opacity: 0.85;
+}
+
+/* ---------- Botões: brilho no hover, afundam no clique ---------- */
+.btn,
+.scan-btn,
+.submit-button,
+.explore-collection-btn,
+.filter-apply-btn,
+.btn-specialist,
+.concierge-button,
+.fixed-proposal-btn,
+.primary-action-button,
+.success-button,
+.offer-action-btn,
+.logout-button {
+    transition: transform 0.18s var(--ease), filter 0.25s var(--ease),
+        background-color 0.25s var(--ease), box-shadow 0.25s var(--ease),
+        opacity 0.25s var(--ease);
+}
+
+/* botões dourados/claros: brilho real em vez de só opacidade */
+.btn-primary:hover,
+.btn-cta:hover,
+.submit-button:hover,
+.explore-collection-btn:hover,
+.filter-apply-btn:hover,
+.primary-action-button:hover,
+.success-button:hover {
+    opacity: 1;
+    filter: brightness(1.08);
+    box-shadow: 0 8px 24px -10px var(--gold-glow);
+}
+
+/* press físico em qualquer botão/ação */
+.btn:active,
+.scan-btn:active,
+.submit-button:active,
+.explore-collection-btn:active,
+.filter-apply-btn:active,
+.btn-specialist:active,
+.concierge-button:active,
+.fixed-proposal-btn:active,
+.primary-action-button:active,
+.success-button:active,
+.offer-action-btn:active,
+.logout-button:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+/* botão flutuante "Fazer proposta" ganha presença no hover */
+.fixed-proposal-btn:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 14px 30px -12px var(--gold-glow);
+}
+
+.offer-action-btn:hover .action-icon {
+    transform: translateX(2px);
+    transition: transform 0.25s var(--ease);
+}
+
+/* ---------- Navegação inferior: indicador do item ativo ---------- */
+.nav-item {
+    position: relative;
+}
+
+.nav-item.active::after,
+.nav-item.active-profile::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.nav-item.active .nav-label,
+.nav-item.active-profile .nav-label {
+    color: var(--color-primary);
+}
+
+/* ---------- Inputs: foco dourado e transição suave ---------- */
+.search-input-wrapper,
+.form-input,
+.form-textarea,
+.filter-select {
+    transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.search-input-wrapper:focus-within,
+.form-input:focus,
+.form-textarea:focus,
+.filter-select:focus {
+    border-color: rgba(255, 212, 61, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 212, 61, 0.08);
+    outline: none;
+}
+
+/* ---------- Cartões de serviço (home) levantam suavemente ---------- */
+.service-card {
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+        background-color 0.35s var(--ease);
+}
+
+.service-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 212, 61, 0.25);
+    background-color: rgba(26, 26, 26, 0.8);
+}
+
+.service-link {
+    transition: color 0.25s var(--ease);
+}
+
+.service-card:hover .service-link {
+    color: var(--color-primary);
+}
+
+/* ---------- Itens de configuração do perfil ---------- */
+.settings-item,
+.garagem-item.salvo {
+    transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
+    cursor: pointer;
+}
+
+.settings-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.garagem-item.salvo:hover {
+    border-color: rgba(255, 212, 61, 0.3);
+}
+
+.settings-chevron {
+    transition: transform 0.25s var(--ease);
+}
+
+.settings-item:hover .settings-chevron {
+    transform: translateX(3px);
+}
+
+/* ---------- Mensagem "nenhum resultado" (filtros de busca) ---------- */
+.no-results {
+    display: none;
+    padding: 32px var(--padding-h) 8px;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-text-muted);
 }
